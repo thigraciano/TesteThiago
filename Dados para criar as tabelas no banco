@@ -1,0 +1,20 @@
+--Criar um banco de dados Teste e criar as tabelas
+
+CREATE TABLE Produto (
+    Codigo NVARCHAR(60) NOT NULL PRIMARY KEY, 
+    Descricao NVARCHAR(300) NOT NULL,         
+    CodTipoUnidade INT NOT NULL,             
+    QtdEstoque INT NOT NULL,                  
+    Observacao NVARCHAR(MAX)                  
+);
+
+CREATE TABLE TipoUnidade (
+    Codigo INT NOT NULL PRIMARY KEY,       
+    Descricao NVARCHAR(255) NOT NULL      
+);
+
+
+select * from Produto
+
+
+select * from TipoUnidade
