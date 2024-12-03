@@ -1,0 +1,100 @@
+﻿@model TesteThiago.Models.ProdutoViewModel
+
+@{
+    ViewData["Title"] = "Produtos";
+}
+
+<h1>Produtos</h1>
+
+<!-- Formulário de Criação -->
+<h3>Criar Novo Produto</h3>
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="NovoProduto.Codigo" class="control-label"></label>
+        <input asp-for="NovoProduto.Codigo" class="form-control" />
+        <span asp-validation-for="NovoProduto.Codigo" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NovoProduto.Descricao" class="control-label"></label>
+        <input asp-for="NovoProduto.Descricao" class="form-control" />
+        <span asp-validation-for="NovoProduto.Descricao" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NovoProduto.CodTipoUnidade" class="control-label"></label>
+        <select asp-for="NovoProduto.CodTipoUnidade" class="form-control" asp-items="Model.TiposUnidade">
+            <option value="">Selecione o Tipo de Unidade</option>
+        </select>
+        <span asp-validation-for="NovoProduto.CodTipoUnidade" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NovoProduto.QtdEstoque" class="control-label"></label>
+        <input asp-for="NovoProduto.QtdEstoque" class="form-control" />
+        <span asp-validation-for="NovoProduto.QtdEstoque" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NovoProduto.Observacao" class="control-label"></label>
+        <input asp-for="NovoProduto.Observacao" class="form-control" />
+        <span asp-validation-for="NovoProduto.Observacao" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
+
+<hr />
+
+<!-- Tabela de Produtos -->
+<h3>Lista de Produtos</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Produtos.FirstOrDefault().Descricao)</th>
+            <th>@Html.DisplayNameFor(model => model.Produtos.FirstOrDefault().CodTipoUnidade)</th>
+            <th>@Html.DisplayNameFor(model => model.Produtos.FirstOrDefault().QtdEstoque)</th>
+            <th>@Html.DisplayNameFor(model => model.Produtos.FirstOrDefault().Observacao)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Produtos)
+        {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CodTipoUnidade)</td>
+                    <td>@Html.DisplayFor(modelItem => item.QtdEstoque)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Observacao)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Codigo">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Codigo">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Codigo">Delete</a>
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <script>
+            $(document).ready(function () {
+                var myModal = new bootstrap.Modal(document.getElementById('successModal'), {
+                    keyboard: false
+                });
+                myModal.show();
+            });
+        </script>
+    }
+}
+
